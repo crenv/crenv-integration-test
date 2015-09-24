@@ -11,8 +11,11 @@ describe 'install' do
       Bundler.with_clean_env do
         ENV['PATH'] = './home/crenv/bin:' + ENV['PATH']
         ENV['CRENV_ROOT'] = './home/crenv/'
+
         system 'crenv install ' + version
         expect($?).to eq(0)
+
+        expect(`crenv versions`).to include(version)
       end
     end
   end
