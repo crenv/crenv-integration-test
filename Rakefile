@@ -1,4 +1,13 @@
+require 'travis'
+require 'bundler/setup'
 require 'rspec/core/rake_task'
 
-RSpec::Core::RakeTask.new('spec')
 task :default => :spec
+
+RSpec::Core::RakeTask.new('spec')
+
+task :travis do
+    Travis.access_token = ENV['TRAVIS_TOKEN']
+    build = Travis::Repository.find(ENV['TRAVIS_BUILD'])
+    build.last_build.restart
+end
