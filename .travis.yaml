@@ -1,0 +1,5 @@
+language: objective-c
+script:
+  - ruby -v
+  - rake -v
+
