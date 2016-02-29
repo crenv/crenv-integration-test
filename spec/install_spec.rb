@@ -12,10 +12,16 @@ describe 'install' do
         ENV['PATH'] = './home/crenv/bin:' + ENV['PATH']
         ENV['CRENV_ROOT'] = './home/crenv/'
 
+        # install
         system 'crenv install ' + version
         expect($?).to eq(0)
 
+        # versions
         expect(`crenv versions`).to include(version)
+
+        # local
+        system 'crenv global ' + version
+        expect($?).to eq(0)
       end
     end
   end
